@@ -11,8 +11,9 @@ describe("App", () => {
 
   it("should render a empty list of todos intially", () => {
     render(<App />);
-    const todoList = screen.getByRole("list");
-    expect(todoList.children.length).toBe(0);
+    const todoListItems = screen.queryAllByRole("listitem");
+
+    expect(todoListItems.length).toBe([]);
   });
 
   it("should render a form with input and button", () => {
@@ -32,8 +33,9 @@ describe("App", () => {
 
     userEvent.click(saveButton);
 
-    const todoList = screen.getByRole("list");
+    const todoListItems = screen.getAllByRole("listitem");
 
-    expect(todoList.children.length).toBe(1);
+    expect(todoListItems.length).toBe(1);
+    expect(todoListItems[0].textContent).toBe("Make Cake");
   });
 });
