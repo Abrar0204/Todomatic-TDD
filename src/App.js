@@ -1,5 +1,18 @@
+import { useState } from "react";
+
 function App() {
-  return <div className="App">Welcome to Todomatic</div>;
+  const [todos, setTodos] = useState([]);
+
+  return (
+    <div className="App">
+      <h1>Welcome to Todomatic</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li>{todo.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App;
