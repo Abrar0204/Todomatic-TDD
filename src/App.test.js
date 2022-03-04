@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App", () => {
@@ -20,5 +21,19 @@ describe("App", () => {
     const saveButton = screen.getByText(/add todo/i);
     expect(formInput).toBeInTheDocument();
     expect(saveButton).toBeInTheDocument();
+  });
+
+  it("should add a todo when form is submitted", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+
+    userEvent.type(formInput, "Make Cake");
+
+    userEvent.click(saveButton);
+
+    const todoList = screen.getByRole("list");
+
+    expect(todoList.children.length).toBe(1);
   });
 });

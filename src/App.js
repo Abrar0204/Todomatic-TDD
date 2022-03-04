@@ -12,10 +12,18 @@ function App() {
     setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTodos((prevInputs) => [
+      ...prevInputs,
+      { text: inputs.todoInput, isCompleted: false },
+    ]);
+  };
+
   return (
     <div className="App">
       <h1>Welcome to Todomatic</h1>
-      <form>
+      <form data-testid="todo-form" onSubmit={handleSubmit}>
         <input
           name="todoInput"
           placeholder="Enter a todo"
