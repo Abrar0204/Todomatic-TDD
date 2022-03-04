@@ -13,15 +13,7 @@ describe("App", () => {
     render(<App />);
     const todoListItems = screen.queryAllByRole("listitem");
 
-    expect(todoListItems.length).toBe([]);
-  });
-
-  it("should render a form with input and button", () => {
-    render(<App />);
-    const formInput = screen.getByPlaceholderText(/enter a todo/i);
-    const saveButton = screen.getByText(/add todo/i);
-    expect(formInput).toBeInTheDocument();
-    expect(saveButton).toBeInTheDocument();
+    expect(todoListItems.length).toBe(0);
   });
 
   it("should add a todo when form is submitted", () => {
