@@ -1,15 +1,9 @@
-import { useState } from "react";
-import TodoForm from "./components/TodoForm/TodoForm";
-import TodoList from "./components/TodoList/TodoList";
+import TodoMatic from "./components/TodoMatic/TodoMatic";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
   return (
     <div className="App">
-      <h1>Welcome to Todomatic</h1>
-      <TodoForm setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoMatic />
     </div>
   );
 }
