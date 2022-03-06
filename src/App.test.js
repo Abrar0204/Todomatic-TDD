@@ -57,4 +57,26 @@ describe("App", () => {
     userEvent.click(todoCheckbox);
     expect(todoCheckbox.checked).toBeTruthy();
   });
+
+  it("should delete todo when delete button is clicked", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+    userEvent.type(formInput, "Make Cake");
+    userEvent.click(saveButton);
+
+    let todoListItems = screen.queryAllByRole("listitem");
+    const todoItem = screen.getByText(/make cake/i);
+
+    expect(todoListItems.length).toBe(1);
+    expect(todoItem.textContent).toBe("Make Cake");
+
+    const todoDeleteButton = screen.getByText(/delete/i);
+    userEvent.click(todoDeleteButton);
+
+    todoListItems = screen.queryAllByRole("listitem");
+
+    expect(todoListItems.length).toBe(0);
+    expect(todoItem).not.toBeInTheDocument();
+  });
 });

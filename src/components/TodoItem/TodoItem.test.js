@@ -28,4 +28,18 @@ describe("TodoItem", () => {
     userEvent.click(todoCheckbox);
     expect(mockFunction).toBeCalled();
   });
+
+  it("should call setTodo function when delete is presses", () => {
+    const mockFunction = jest.fn();
+    render(
+      <TodoItem
+        todo={{ text: "Make Cake", isCompleted: false }}
+        setTodos={mockFunction}
+        todoIndex={0}
+      />
+    );
+    const todoDeleteButton = screen.getByText(/delete/i);
+    userEvent.click(todoDeleteButton);
+    expect(mockFunction).toBeCalled();
+  });
 });

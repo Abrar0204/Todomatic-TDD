@@ -14,6 +14,12 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
     );
   };
 
+  const deleteTodo = () => {
+    setTodos((prevTodos) =>
+      prevTodos.filter((_, index) => todoIndex !== index)
+    );
+  };
+
   return (
     <li>
       <label>
@@ -26,7 +32,7 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
       </label>
       <div>
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={deleteTodo}>Delete</button>
       </div>
     </li>
   );
