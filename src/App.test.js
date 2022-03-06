@@ -43,4 +43,17 @@ describe("App", () => {
     const todoListItems = screen.queryAllByRole("listitem");
     expect(todoListItems.length).toBe(0);
   });
+
+  it("should check and uncheck todo when clicked", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+    userEvent.type(formInput, "Make Cake");
+    userEvent.click(saveButton);
+
+    const todoCheckbox = screen.getByLabelText(/make cake/i);
+    expect(todoCheckbox.checked).toBeFalsy();
+    userEvent.click(todoCheckbox);
+    expect(todoCheckbox.checked).toBeTruthy();
+  });
 });
