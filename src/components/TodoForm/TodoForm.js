@@ -23,7 +23,7 @@ const TodoForm = ({ setTodos }) => {
   };
 
   return (
-    <form data-testid="todo-form" onSubmit={handleSubmit}>
+    <form id="todo-form" data-testid="todo-form" onSubmit={handleSubmit}>
       <input
         name="todoInput"
         placeholder="Enter a todo"

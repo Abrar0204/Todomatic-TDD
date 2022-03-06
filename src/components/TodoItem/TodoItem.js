@@ -51,7 +51,7 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
   return (
     <li>
       {isEditing ? (
-        <input value={editTodoInput} onChange={handleInput} />
+        <input type="text" value={editTodoInput} onChange={handleInput} />
       ) : (
         <label>
           <input
@@ -62,13 +62,15 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
           {todo.text}
         </label>
       )}
-      <div>
+      <div className="button-group">
         {isEditing ? (
           <button onClick={editTodo}>Save</button>
         ) : (
           <button onClick={switchToEditTodoMode}>Edit</button>
         )}
-        <button onClick={deleteTodo}>Delete</button>
+        <button className="delete-button" onClick={deleteTodo}>
+          Delete
+        </button>
       </div>
     </li>
   );

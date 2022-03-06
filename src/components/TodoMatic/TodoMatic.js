@@ -6,7 +6,7 @@ const TodoMatic = () => {
   const [todos, setTodos] = useState([]);
   return (
     <div id="todo-container" data-testid="todomatic">
-      <h1>Welcome to Todomatic</h1>
+      <h1 className="todo-heading">Welcome to Todomatic</h1>
       <TodoForm setTodos={setTodos} />
       <TodoList todos={todos} setTodos={setTodos} />
     </div>

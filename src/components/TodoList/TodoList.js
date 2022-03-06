@@ -3,7 +3,7 @@ import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = ({ todos, setTodos }) => {
   return (
-    <ul>
+    <ul id="todo-list">
       {todos.map((todo, index) => (
         <TodoItem
           todo={todo}
