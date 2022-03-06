@@ -9,13 +9,6 @@ describe("App", () => {
     expect(todoTitle).toBeInTheDocument();
   });
 
-  it("should render a empty list of todos intially", () => {
-    render(<App />);
-    const todoListItems = screen.queryAllByRole("listitem");
-
-    expect(todoListItems.length).toBe(0);
-  });
-
   it("should add a todo when form is submitted", () => {
     render(<App />);
     const formInput = screen.getByPlaceholderText(/enter a todo/i);
