@@ -11,8 +11,7 @@ describe("TodoList", () => {
 
   it("should render a list of todos when a todo array is passed", () => {
     render(<TodoList todos={[{ text: "Make Cake", isCompleted: false }]} />);
-    const todoListItems = screen.queryAllByRole("listitem");
-    expect(todoListItems.length).toBe(1);
-    expect(todoListItems[0].textContent).toBe("Make Cake");
+    const todoListItem = screen.getByText(/make cake/i);
+    expect(todoListItem.textContent).toBe("Make Cake");
   });
 });

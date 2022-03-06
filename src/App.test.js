@@ -18,10 +18,11 @@ describe("App", () => {
 
     userEvent.click(saveButton);
 
-    const todoListItems = screen.getAllByRole("listitem");
+    const todoListItem = screen.getByText(/make cake/i);
 
-    expect(todoListItems.length).toBe(1);
-    expect(todoListItems[0].textContent).toBe("Make Cake");
+    expect(todoListItem).toBeInTheDocument();
+
+    expect(todoListItem.textContent).toBe("Make Cake");
   });
 
   it("should clear input when form is submitted", () => {

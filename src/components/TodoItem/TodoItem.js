@@ -24,6 +24,10 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
         />
         {todo.text}
       </label>
+      <div>
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
     </li>
   );
 };
