@@ -23,4 +23,24 @@ describe("App", () => {
     expect(todoListItems.length).toBe(1);
     expect(todoListItems[0].textContent).toBe("Make Cake");
   });
+
+  it("should clear input when form is submitted", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+    userEvent.type(formInput, "Make Cake");
+    userEvent.click(saveButton);
+
+    expect(screen.queryByDisplayValue("Make Cake")).toBeFalsy();
+  });
+
+  it("should not add todo when a empty input is submitted", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+    userEvent.type(formInput, "     ");
+    userEvent.click(saveButton);
+    const todoListItems = screen.queryAllByRole("listitem");
+    expect(todoListItems.length).toBe(0);
+  });
 });

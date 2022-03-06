@@ -12,10 +12,14 @@ const TodoForm = ({ setTodos }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (inputs.todoInput.trim() === "") {
+      return;
+    }
     setTodos((prevInputs) => [
       ...prevInputs,
       { text: inputs.todoInput, isCompleted: false },
     ]);
+    setInputs((prevInputs) => ({ ...prevInputs, todoInput: "" }));
   };
 
   return (
@@ -23,7 +27,7 @@ const TodoForm = ({ setTodos }) => {
       <input
         name="todoInput"
         placeholder="Enter a todo"
-        value={inputs.todo}
+        value={inputs.todoInput}
         onChange={handleInput}
       />
       <button type="submit">Add todo</button>
