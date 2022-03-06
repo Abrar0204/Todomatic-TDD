@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TodoItem = ({ todo, todoIndex, setTodos }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTodoInput, setEditTodoInput] = useState(todo.text);
+
+  const handleInput = (e) => {
+    setEditTodoInput(e.target.value);
+  };
+
   const checkOrUnCheckTodo = () => {
     const isCompleted = todo.isCompleted;
     setTodos((prevTodos) =>
@@ -20,18 +27,47 @@ const TodoItem = ({ todo, todoIndex, setTodos }) => {
     );
   };
 
+  const switchToEditTodoMode = () => {
+    setIsEditing(true);
+  };
+
+  const editTodo = () => {
+    if (editTodoInput.trim() === "") {
+      return;
+    }
+    setTodos((prevTodos) =>
+      prevTodos.map((todo, index) => {
+        if (index === todoIndex) {
+          return { ...todo, text: editTodoInput };
+        } else {
+          return todo;
+        }
+      })
+    );
+
+    setIsEditing(false);
+  };
+
   return (
     <li>
-      <label>
-        <input
-          type="checkbox"
-          defaultChecked={todo.isCompleted}
-          onChange={checkOrUnCheckTodo}
-        />
-        {todo.text}
-      </label>
+      {isEditing ? (
+        <input value={editTodoInput} onChange={handleInput} />
+      ) : (
+        <label>
+          <input
+            type="checkbox"
+            defaultChecked={todo.isCompleted}
+            onChange={checkOrUnCheckTodo}
+          />
+          {todo.text}
+        </label>
+      )}
       <div>
-        <button>Edit</button>
+        {isEditing ? (
+          <button onClick={editTodo}>Save</button>
+        ) : (
+          <button onClick={switchToEditTodoMode}>Edit</button>
+        )}
         <button onClick={deleteTodo}>Delete</button>
       </div>
     </li>

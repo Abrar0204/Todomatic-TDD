@@ -79,4 +79,29 @@ describe("App", () => {
     expect(todoListItems.length).toBe(0);
     expect(todoItem).not.toBeInTheDocument();
   });
+
+  it("should edit a todo", () => {
+    render(<App />);
+    const formInput = screen.getByPlaceholderText(/enter a todo/i);
+    const saveButton = screen.getByText(/add todo/i);
+    userEvent.type(formInput, "Make Cake");
+    userEvent.click(saveButton);
+
+    const todoEditButton = screen.getByText(/edit/i);
+
+    userEvent.click(todoEditButton);
+    const todoSaveButton = screen.getByText(/save/i);
+
+    const todoEditInput = screen.getByDisplayValue("Make Cake");
+
+    userEvent.clear(todoEditInput);
+    userEvent.type(todoEditInput, "Bake Cake");
+
+    userEvent.click(todoSaveButton);
+
+    const todoCheckbox = screen.getByText(/bake cake/i);
+
+    expect(todoCheckbox).toBeInTheDocument();
+    expect(todoCheckbox.textContent).toBe("Bake Cake");
+  });
 });

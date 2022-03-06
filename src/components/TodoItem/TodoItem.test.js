@@ -42,4 +42,49 @@ describe("TodoItem", () => {
     userEvent.click(todoDeleteButton);
     expect(mockFunction).toBeCalled();
   });
+
+  it("should change checkbox to input and edit to save when edit button is clicked", () => {
+    const mockFunction = jest.fn();
+    render(
+      <TodoItem
+        todo={{ text: "Make Cake", isCompleted: false }}
+        setTodos={mockFunction}
+        todoIndex={0}
+      />
+    );
+
+    const todoEditButton = screen.getByText(/edit/i);
+
+    userEvent.click(todoEditButton);
+
+    const todoSaveButton = screen.getByText(/save/i);
+
+    expect(todoSaveButton).toBeInTheDocument();
+
+    const todoEditInput = screen.getByDisplayValue(/make cake/i);
+
+    expect(todoEditInput).toBeInTheDocument();
+    expect(todoEditInput.value).toBe("Make Cake");
+  });
+
+  it("should call setTodo when todo is edited", () => {
+    const mockFunction = jest.fn();
+    render(
+      <TodoItem
+        todo={{ text: "Make Cake", isCompleted: false }}
+        setTodos={mockFunction}
+        todoIndex={0}
+      />
+    );
+
+    const todoEditButton = screen.getByText(/edit/i);
+
+    userEvent.click(todoEditButton);
+
+    const todoSaveButton = screen.getByText(/save/i);
+
+    userEvent.click(todoSaveButton);
+
+    expect(mockFunction).toBeCalled();
+  });
 });
