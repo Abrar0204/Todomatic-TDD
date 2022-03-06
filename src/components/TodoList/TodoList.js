@@ -1,31 +1,16 @@
 import React from "react";
+import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = ({ todos, setTodos }) => {
-  const checkOrUnCheckTodo = (todoIndex) => {
-    const isCompleted = todos[todoIndex].isCompleted;
-    setTodos((prevTodos) =>
-      prevTodos.map((todo, index) => {
-        if (todoIndex === index) {
-          return { ...todo, isCompleted: !isCompleted };
-        } else {
-          return todo;
-        }
-      })
-    );
-  };
   return (
     <ul>
       {todos.map((todo, index) => (
-        <li key={index}>
-          <label>
-            <input
-              type="checkbox"
-              defaultChecked={todo.isCompleted}
-              onChange={() => checkOrUnCheckTodo(index)}
-            />
-            {todo.text}
-          </label>
-        </li>
+        <TodoItem
+          todo={todo}
+          todoIndex={index}
+          setTodos={setTodos}
+          key={index}
+        />
       ))}
     </ul>
   );
