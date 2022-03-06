@@ -10,7 +10,12 @@ function App() {
       <TodoForm setTodos={setTodos} />
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}>{todo.text}</li>
+          <li key={index}>
+            <label>
+              <input type="checkbox" defaultChecked={todo.isCompleted} />
+              {todo.text}
+            </label>
+          </li>
         ))}
       </ul>
     </div>
